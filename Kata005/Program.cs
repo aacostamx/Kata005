@@ -1,22 +1,44 @@
-﻿using Kata005.Repositories;
+﻿using Kata005.Models;
+using Kata005.Repositories;
 using System;
+using System.Collections.Generic;
+using SimpleInjector;
+using Kata005.Interfaces;
 
 namespace Kata005
 {
-    class Program
+    public class Program
     {
+        static readonly Container container;
+
+        static Program()
+        {
+            container = new Container();
+
+            container.Register<IPrincipal, Principals>();
+            container.Register<IStudent, Students>();
+            container.Register<ITeacher, Teachers>();
+
+            container.Verify();
+        }
+
         static void Main(string[] args)
         {
-            Principals prinicals = new Principals();
-            Teachers teachers = new Teachers();
-            Students students = new Students();
+            var principalRepository = container.GetInstance<IPrincipal>();
+            var studentRepository = container.GetInstance<IStudent>();
+            var teacherRepository = container.GetInstance<ITeacher>();
 
-            var teacher = teachers.GetById(1);
-            Console.WriteLine($"{teacher.Name}");
-            var studentsForTeacher = students.GetByTeacherId(teacher.Id);
-            foreach(var student in studentsForTeacher)
+            Guid principalId = principalRepository.GetByExpression(c => c.Name == "Dr. Wilson").Id;
+            var principal = principalRepository.GetByExpression(c => c.Id == principalId);
+            Console.WriteLine($"Id: {principal.Id} \nPrincipal : {principal.Name}");
+
+            Teacher teacher = teacherRepository.GetByExpression(c => c.Id == 1);
+            Console.WriteLine($"Teacher: {teacher.Name}");
+
+            List<Student> studentsForTeacher = studentRepository.GetByTeacherId(teacher.Id);
+            foreach (Student student in studentsForTeacher)
             {
-                Console.WriteLine($"  {student.Name}");
+                Console.WriteLine($"Student: {student.Name}");
             }
         }
     }
