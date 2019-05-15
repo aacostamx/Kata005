@@ -68,3 +68,6 @@ One caveat is that Maybe<> is an implementaion detail, and should not be surface
 
     https://mikhail.io/2018/07/monads-explained-in-csharp-again/
     
+    The ?? operator is called the null-coalescing operator. It returns the left-hand operand if the operand is not null; otherwise it returns the right hand operand.
+
+    https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/null-coalescing-operator
