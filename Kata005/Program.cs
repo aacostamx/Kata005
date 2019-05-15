@@ -28,8 +28,11 @@ namespace Kata005
             var studentRepository = container.GetInstance<IStudent>();
             var teacherRepository = container.GetInstance<ITeacher>();
 
-            Guid principalId = principalRepository.GetByExpression(c => c.Name == "Dr. Wilson").Id;
-            var principal = principalRepository.GetByExpression(c => c.Id == principalId);
+            //var none = Maybe<int>.None;
+            //Console.WriteLine($"none:  {none.ToString()}");
+
+            Guid guid = principalRepository.GetByExpression(c => c.Name == "Dr. Wilson").Id;
+            var principal = principalRepository.GetByExpression(c => c.Id == guid);
             Console.WriteLine($"Id: {principal.Id} \nPrincipal : {principal.Name}");
 
             Teacher teacher = teacherRepository.GetByExpression(c => c.Id == 1);

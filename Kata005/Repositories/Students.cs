@@ -7,7 +7,7 @@ namespace Kata005.Repositories
 {
     public class Students : Repository<Student>, IStudent
     {
-        public Students(List<Student> source)
+        public Students()
         {
             Source = new List<Student>()
             {
