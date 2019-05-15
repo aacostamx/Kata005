@@ -21,7 +21,7 @@ namespace Kata005.Repositories
 
         public List<Student> GetByTeacherId(int teacherId)
         {
-            return Source.Where(c => c.TeacherId == teacherId).ToList();
+            return Source.Where(c => c.TeacherId == teacherId).ToList() ?? new List<Student>();
         }
     }
 }

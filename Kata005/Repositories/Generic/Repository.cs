@@ -11,6 +11,9 @@ namespace Kata005.Repositories
         public List<T> Source { get; set; }
         public Repository() => Source = default;
 
-        public virtual T GetByExpression(Expression<Func<T, bool>> match) => Source.AsQueryable().SingleOrDefault(match);
+        public virtual T GetByExpression(Expression<Func<T, bool>> match)
+        {
+            return Source.AsQueryable().FirstOrDefault(match);
+        }
     }
 }

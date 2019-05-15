@@ -1,6 +1,8 @@
 ﻿using Kata005.Interfaces;
 using Kata005.Models;
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace Kata005.Repositories
 {
@@ -15,5 +17,9 @@ namespace Kata005.Repositories
             };
         }
 
+        public override Teacher GetByExpression(Expression<Func<Teacher, bool>> match)
+        {
+            return base.GetByExpression(match) ?? new Teacher();
+        }
     }
 }
