@@ -28,9 +28,6 @@ namespace Kata005
             var studentRepository = container.GetInstance<IStudent>();
             var teacherRepository = container.GetInstance<ITeacher>();
 
-            //var none = Maybe<int>.None;
-            //Console.WriteLine($"none:  {none.ToString()}");
-
             Guid guid = principalRepository.GetByExpression(c => c.Name == "Dr. Wilson").Id;
             var principal = principalRepository.GetByExpression(c => c.Id == guid);
             Console.WriteLine($"Id: {principal.Id} \nPrincipal : {principal.Name}");
@@ -39,9 +36,10 @@ namespace Kata005
             Console.WriteLine($"Teacher: {teacher.Name}");
 
             List<Student> studentsForTeacher = studentRepository.GetByTeacherId(teacher.Id);
+            Console.WriteLine($"Students: ");
             foreach (Student student in studentsForTeacher)
             {
-                Console.WriteLine($"Student: {student.Name}");
+                Console.WriteLine($"{student.Name}");
             }
         }
     }

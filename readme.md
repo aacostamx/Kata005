@@ -12,12 +12,31 @@
 ## Discussion
 - Research the "I" in SOLID. 
     * Describe what this means in terms of software development
+    Interface Segregation Principle - A Client should not be forced to implement an interface that it doesn’t use
+
 - In the context of Domain Driven Design (DDD), what is a Bounded Context?
+Bounded Context is a central pattern in Domain-Driven Design. It is the focus of DDD's strategic design section which is all about dealing with large models and teams. DDD deals with large models by dividing them into different Bounded Contexts and being explicit about their interrelationships.
+https://docs.microsoft.com/en-us/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/ddd-oriented-microservice
+https://martinfowler.com/bliki/BoundedContext.html
+
 - Describe how the supplied code complies or violates "I".
+A Client should not be forced to implement an interface that it doesn’t use.
+
 - Describe common issues with generic repositories and some patterns to minimize them.
+A generic repository is often used with the entity framework to speed up the process of creating a data layer. In most cases this is a generalization too far and it can be a trap for lazy developers.
+https://www.ben-morris.com/why-the-generic-repository-is-just-a-lazy-anti-pattern/
+
 - Id modeling can have unintended consequences.
     * Describe pros/cons of int Ids (in all tiers of an application)
+        You want easily-understood IDs.
+        You want your URLs to be "hackable" by your end-users.
+        You are concerned about performance (in very large applications).
     * Describe pros/cons of Guid Ids (in all tiers of an application)
+        You want the data to be uniquely-identified, no matter where it came from.
+        You need to be able to combine data from difference sources with little-to-no chance of duplicate GUIDs.
+        You don't want or don't care about the users needing to remember an ID themselves.
+
+    https://exceptionnotfound.net/integers-vs-guids-the-great-primary-key-debate/
 
 ## Thought Exercise
 Consider 
@@ -46,4 +65,6 @@ One caveat is that Maybe<> is an implementaion detail, and should not be surface
     * How can it be applied to fix an issue with querying by Id in the current code?
     * Implement the struct (removing the Contract and AllowNull code) to elevate meaning to the repostory results.
     * When do you think Maybe<> is applicable? When is it not applicable?
+
+    https://mikhail.io/2018/07/monads-explained-in-csharp-again/
     
